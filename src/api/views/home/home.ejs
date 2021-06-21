@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>
+        <%= title %>
+    </title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <%- include('../../components/bootstrapCND/bootstrapCND') %>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="body-content">
+            <%- include('../../components/navbar/navbar') %>
+                <%- include('../../components/carousel/carousel') %>
+                    <div class="row">
+                        <h1 class="p-2 m-4">CADASTROS</h1>
+                        <div class="col-6">
+                            <a href="/operadoras">
+                                <div class="card p-2 m-2">
+                                    <h2>OPERADORAS</h2>
+                                    <img src="https://i2.wp.com/www.inteligenciamovel.com.br/wp-content/uploads/2019/06/operadoras-feira.jpg?zoom=2&resize=800%2C445&ssl=1"
+                                        alt="Operadoras de Telefone">
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-6">
+                            <a href="/telefones">
+                                <div class="card p-2 m-2">
+                                    <h2>TELEFONE</h2>
+                                    <img src="https://a-static.besthdwallpaper.com/future-mobile-handset-papel-de-parede-12033_L.jpg"
+                                        alt="">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+        </div>
+        <%- include('../../components/footer/footer') %>
+    </div>
+</body>
+
+</html>
