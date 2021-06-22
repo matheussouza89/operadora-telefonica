@@ -8,7 +8,6 @@
         <%= title %>
     </title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <%- include('../../components/bootstrapCND/bootstrapCND') %>
 </head>
 
@@ -17,37 +16,37 @@
         <div class="body-content">
             <%- include('../../components/navbar/navbar') %>
                 <div class="card p-4 m-5">
-                    <form>
+                    <form action="/operadoras/novo" method="POST">
                         <legend>Cadastro de Operadoras</legend>
                         <div class="form-text">Insira as informações para cadastrar uma nova operadora.</div>
                         <div class="row pt-4">
                             <div class="col-6">
                                 <label for="exampleInputEmail1" class="form-label">Nome da Operadora</label>
-                                <input type="text" class="form-control" value="<%= operadoras_list.ope_nome %>"
+                                <input type="text" class="form-control" value="<%= operadoras_list[0].ope_nome %>"
                                     name="ope_nome" maxlength="20" <%= seeRegister %>/>
                             </div>
                             <div class="col-6">
                                 <label for="exampleInputEmail1" class="form-label">Código da Operadora</label>
-                                <input type="text" class="form-control" value="<%= operadoras_list.codigo %>"
+                                <input type="text" class="form-control" value="<%= operadoras_list[0].ope_codigo %>"
                                     name="ope_codigo" readonly />
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-6">
                                 <label for="exampleInputEmail1" class="form-label">Nome Fantasia</label>
-                                <input type="text" class="form-control" value="<%= operadoras_list.ope_fantasia %>"
+                                <input type="text" class="form-control" value="<%= operadoras_list[0].ope_fantasia %>"
                                     name="ope_fantasia" maxlength="10" <%= seeRegister %>/>
                             </div>
                             <div class="col-6">
                                 <label for="exampleInputEmail1" class="form-label">Prefixo</label>
-                                <input type="text" class="form-control" value="<%= operadoras_list.ope_prefixo %>"
+                                <input type="text" class="form-control" value="<%= operadoras_list[0].ope_prefixo %>"
                                     name="ope_prefixo" maxlength="11" <%= seeRegister %>/>
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
                                 <label for="exampleInputEmail1" class="form-label">Cidade</label>
-                                <input type="text" class="form-control" value="<%= operadoras_list.ope_cidade %>"
+                                <input type="text" class="form-control" value="<%= operadoras_list[0].ope_cidade %>"
                                     name="ope_cidade" maxlength="20" <%= seeRegister %>/>
                             </div>
                         </div>
@@ -56,7 +55,7 @@
                                 <div class="row">
                                     <div class="col-6">
 
-                                        <a type="submit" class="btn btn-success w-100" href=<%=urlSubmit %>>
+                                        <a type="submit" class="btn btn-success w-100" href='/operadoras'>
                                             Salvar
                                         </a>
                                     </div>

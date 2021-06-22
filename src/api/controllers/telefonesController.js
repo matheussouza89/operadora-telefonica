@@ -72,6 +72,7 @@ export function createTelefone(req, res) {
 
 export function visualizarTelefones(req, res) {
     var id = req.params.codigo;
+    console.log(id)
     telefonesModel.getByIdTelefones(id, function (err, result) {
         if (err) {
             console.log("Erro aqui")

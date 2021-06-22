@@ -1,4 +1,9 @@
 import * as homeController from '../controllers/homeController';
 import { app } from '../../app';
+import { Router } from 'express';
 
-app.get('/', homeController.homeController);
+const router = Router();
+
+router.get('/', homeController.homeController);
+
+app.use(router)

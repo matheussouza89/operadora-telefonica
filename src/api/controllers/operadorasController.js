@@ -6,7 +6,6 @@ export function operadorasController(req, res) {
         if (err) {
             throw err;
         } else {
-            console.log(result)
             res.render('operadoras/operadoras.ejs', {
                 title: "Operadoras",
                 columns: COLUMNS,
@@ -19,13 +18,15 @@ export function operadorasController(req, res) {
 export function cadastroOperadoras(req, res) {
     res.render('operadoras/form_operadoras.ejs', {
         title: 'Cadastrar Operadora',
-        operadoras_list: {
-            ope_codigo: '',
-            ope_nome: '',
-            ope_fantasia: '',
-            ope_prefixo: '',
-            ope_cidade: ''
-        },
+        operadoras_list: [
+            {
+              ope_codigo: "",
+              ope_nome: "",
+              ope_fantasia: "",
+              ope_prefixo: "",
+              ope_cidade: ""
+            }
+          ],
         urlSubmit: "/operadoras/novo",
         seeRegister: ""
     })
@@ -40,23 +41,22 @@ export function getByIdOperadoras(req, res) {
             res.render('operadoras/form_operadoras.ejs', {
                 title: 'Editar Operadora',
                 operadoras_list: result,
-                urlSubmit: `operadoras/editar/${id}`
+                urlSubmit: `operadoras/editar/${id}`,
+                seeRegister: ""
             })
         }
     })
 }
 
 export function createOperadora(req, res) {
-    const data = res.body;
-    console.log(res.body)
+    const data = req.body;
     if (data.ope_codigo === "") {
         data.ope_codigo = null;
         operadorasModel.createOperadoras(data, function (err, result) {
-            console.log("Passou")
             if (err) {
                 throw err
             } else {
-                res.redirect('operadoras')
+                res.redirect('/')
             }
         })
     } else {
@@ -72,17 +72,15 @@ export function createOperadora(req, res) {
 
 export function visualizarOperadoras(req, res) {
     var id = req.params.codigo;
-    console.log("Passou aqui")
     operadorasModel.getByIdOperadoras(id, function (err, result) {
         if (err) {
-            console.log("Erro aqui")
             throw err;
         } else {
             res.render('operadoras/form_operadoras.ejs', {
                 title: 'Editar Operadora',
                 operadoras_list: result,
                 urlSubmit: ``,
-                seeRegister: readonly
+                seeRegister: 'readonly'
             })
         }
     })
@@ -90,11 +88,11 @@ export function visualizarOperadoras(req, res) {
 
 export function deleteOperadoras(req, res) {
     var id = req.params.codigo;
-    operadorasModel.deleteOperadoras(id, function (err, result){
+    operadorasModel.removeOperadoras(id, function (err, result){
         if(err){
             throw err
         }else{
-            res.redirect('operadoras')
+            res.redirect('/operadoras',)
         }
     })
 }
