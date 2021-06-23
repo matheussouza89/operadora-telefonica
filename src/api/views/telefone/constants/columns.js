@@ -1,22 +1,26 @@
 export const COLUMNS = [
     {
-        Header: "Nome",
-        accessor: "ope_nome"
+        Header: "Descrição",
+        accessor: "tel_descricao"
     },
     {
         Header: "Código",
+        accessor: "tel_codigo"
+    },
+    {
+        Header: "Modelo",
+        accessor: "tel_modelo"
+    },
+    {
+        Header: "Cor",
+        accessor: "tel_cor"
+    },
+    {
+        Header: "Chips",
+        accessor: "tel_chips"
+    },        
+    {
+        Header: "Operadora",
         accessor: "ope_codigo"
-    },
-    {
-        Header: "Nome Fantasia",
-        accessor: "ope_fantasia"
-    },
-    {
-        Header: "Prefixo",
-        accessor: "ope_prefixo"
-    },
-    {
-        Header: "Cidade",
-        accessor: "ope_cidade"
     },        
 ]

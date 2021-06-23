@@ -8,7 +8,6 @@
         <%= title %>
     </title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <%- include('../../components/bootstrapCND/bootstrapCND') %>
 </head>
 
@@ -17,49 +16,52 @@
         <div class="body-content">
             <%- include('../../components/navbar/navbar') %>
                 <div class="card p-4 m-5">
-                    <form>
+                    <form action="/telefones/novo" method="POST">
                         <legend>Cadastro de Telefones</legend>
                         <div class="form-text">Insira as informações para cadastrar um novo telefone.</div>
                         <div class="row pt-4">
                             <div class="col-6">
-                                <label for="exampleInputEmail1" class="form-label">Descrição do Celular</label>
-                                <input type="text" class="form-control" value="<%= telefones_list.tel_descricao %>"
+                                <label class="form-label">Descrição do Celular</label>
+                                <input type="text" class="form-control" value="<%= telefones_list[0].tel_descricao %>"
                                     name="tel_descricao" maxlength="20" <%= seeRegister %>/>
                             </div>
                             <div class="col-6">
-                                <label for="exampleInputEmail1" class="form-label">Código do Telefone</label>
-                                <input type="text" class="form-control" value="<%= telefones_list.tel_codigo %>"
+                                <label class="form-label">Código do Telefone</label>
+                                <input type="text" class="form-control" value="<%= telefones_list[0].tel_codigo %>"
                                     name="tel_codigo" readonly />
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-6">
-                                <label for="exampleInputEmail1" class="form-label">Modelo</label>
-                                <input type="text" class="form-control" value="<%= telefones_list.tel_modelo %>"
+                                <label class="form-label">Modelo</label>
+                                <input type="text" class="form-control" value="<%= telefones_list[0].tel_modelo %>"
                                     name="tel_modelo" maxlength="10" <%= seeRegister %>/>
                             </div>
                             <div class="col-6">
-                                <label for="exampleInputEmail1" class="form-label">Cor</label>
-                                <input type="text" class="form-control" value="<%= telefones_list.tel_cor %>"
+                                <label class="form-label">Cor</label>
+                                <input type="text" class="form-control" value="<%= telefones_list[0].tel_cor %>"
                                     name="tel_cor" maxlength="11" <%= seeRegister %>/>
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
-                                <label for="exampleInputEmail1" class="form-label">Qtde Chips</label>
-                                <input type="text" class="form-control" value="<%= telefones_list.tel_chips %>"
+                                <label class="form-label">Quantidade de Chips</label>
+                                <input type="text" class="form-control" value="<%= telefones_list[0].tel_chips %>"
                                     name="tel_chips" maxlength="20" <%= seeRegister %>/>
                             </div>
                         </div>
                         <div class="row pt-4">
                             <div class="col-12">
                                 <label for="exampleInputEmail1" class="form-label">Operadora</label>
-                                <select name="ope_codigo" id="ope_codigo" class="form-control" required>
-                                    <%= operadoras_list.forEach(function(operadora){ %>
-                                    <option>
-
-                                    </option>
-                                    <%= }); %>
+                                <select name="ope_codigo" id="ope_codigo" class="form-control" required <%= seeRegister %>>
+                                    <option value=""></option>
+                                    <% for(let i=0; i < operadoras_list.length; i++ ){ -%>
+                                        <option <% if (operadoras_list[i].ope_codigo === telefones_list[0].ope_codigo) {
+                                            %> selected="selected" <% }%>
+                                                value = "<%= operadoras_list[i].ope_codigo %>"><%=
+                                                        operadoras_list[i].ope_nome %>
+                                        </option>
+                                        <% } %>
                                 </select>
                             </div>
                         </div>
@@ -67,14 +69,11 @@
                             <div class="col-6">
                                 <div class="row">
                                     <div class="col-6">
-
-                                        <a type="submit" class="btn btn-success w-100" href=<%=urlSubmit %>>
-                                            Salvar
-                                        </a>
+                                        <button class="btn btn-success w-100" type="submit" <%= href %>>Salvar</button>
                                     </div>
                                     <div class="col-6">
-                                        <a href="/telefones">
-                                            <button class="btn btn-danger w-100">Cancelar</button>
+                                        <a class="btn btn-danger w-100" href="/telefones">
+                                            Cancelar
                                         </a>
                                     </div>
                                 </div>

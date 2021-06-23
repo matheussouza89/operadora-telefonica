@@ -4,6 +4,10 @@ export function getAllOperadoras(callback) {
     conexao.query('SELECT O.* FROM operadora O', callback)
 }
 
+export function getOperadorasFilter(nome, fantasia, cidade, callback){
+    conexao.query('SELECT * FROM operadora WHERE ope_nome= ' + nome + ' && ope_fantasia=' + fantasia + ' && ope_cidade=' + cidade, callback);
+}
+
 export function getByIdOperadoras(id, callback) {
     conexao.query('SELECT * FROM operadora  WHERE ope_codigo = ' + id, callback);
 }

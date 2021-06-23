@@ -8,7 +8,6 @@
         <%= title %>
     </title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <%- include('../../components/bootstrapCND/bootstrapCND') %>
 </head>
 
@@ -17,6 +16,29 @@
         <div class="body-content">
             <%- include('../../components/navbar/navbar') %>
                 <div class="card p-4 m-5">
+                    <div class="row">
+                        <form action="telefones/filtro" method="GET">
+                            <div class="row pt-4 pb-4">
+                                <div class="col-4">
+                                    <label for="exampleInputEmail1" class="form-label">Descrição</label>
+                                    <input type="text" class="form-control" name="tel_descricao" maxlength="20" />
+                                </div>
+                                <div class="col-4">
+                                    <label for="exampleInputEmail1" class="form-label">Modelo</label>
+                                    <input type="text" class="form-control" name="tel_modelo" />
+                                </div>
+                                <div class="col-4">
+                                    <label for="exampleInputEmail1" class="form-label">Cor</label>
+                                    <input type="text" class="form-control" name="tel_cor" />
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <col class="col-3">
+                                <button type="submit" class="btn btn-success w-25">Pesquisar</button>
+                                </col>
+                            </div>
+                        </form>
+                    </div>
                     <div class="row">
                         <div class="col-9">
                             <legend>
@@ -53,9 +75,10 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <a href="telefones/visualizar/<%= telefones_list[i].ope_codigo %>">
-                                                            <svg width="15" height="15" viewBox="0 0 100 100" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
+                                                        <a
+                                                            href="telefones/visualizar/<%= telefones_list[i].tel_codigo %>">
+                                                            <svg width="15" height="15" viewBox="0 0 100 100"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M100 50C100 50 81.25 15.625 50 15.625C18.75 15.625 0 50 0 50C0 50 18.75 84.375 50 84.375C81.25 84.375 100 50 100 50ZM7.33125 50C10.3532 45.407 13.829 41.1293 17.7062 37.2312C25.75 29.175 36.75 21.875 50 21.875C63.25 21.875 74.2438 29.175 82.3 37.2312C86.1772 41.1293 89.653 45.407 92.675 50C92.3125 50.5437 91.9125 51.1438 91.4563 51.8C89.3625 54.8 86.2688 58.8 82.3 62.7688C74.2438 70.825 63.2437 78.125 50 78.125C36.75 78.125 25.7563 70.825 17.7 62.7688C13.8228 58.8707 10.347 54.593 7.325 50H7.33125Z"
                                                                     fill="black" />
@@ -66,9 +89,9 @@
                                                         </a>
                                                     </div>
                                                     <div class="col">
-                                                        <a href="telefones/editar/<%= telefones_list[i].ope_codigo %>">
-                                                            <svg width="15" height="15" viewBox="0 0 100 100" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
+                                                        <a href="telefones/<%= telefones_list[i].tel_codigo %>">
+                                                            <svg width="15" height="15" viewBox="0 0 100 100"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <path
                                                                     d="M96.8875 12.125C97.4714 12.7108 97.7993 13.5041 97.7993 14.3313C97.7993 15.1584 97.4714 15.9517 96.8875 16.5375L90.3687 23.0625L77.8687 10.5625L84.3875 4.0375C84.9735 3.45165 85.7682 3.12254 86.5969 3.12254C87.4255 3.12254 88.2202 3.45165 88.8062 4.0375L96.8875 12.1188V12.125ZM85.95 27.475L73.45 14.975L30.8688 57.5625C30.5248 57.9064 30.2658 58.3259 30.1125 58.7875L25.0813 73.875C24.99 74.1501 24.9771 74.4451 25.0438 74.7271C25.1106 75.0091 25.2545 75.2669 25.4594 75.4718C25.6643 75.6767 25.9222 75.8206 26.2042 75.8874C26.4862 75.9542 26.7812 75.9412 27.0563 75.85L42.1438 70.8188C42.6048 70.6673 43.0242 70.4105 43.3688 70.0688L85.95 27.4812V27.475Z"
                                                                     fill="black" />
@@ -79,9 +102,9 @@
                                                         </a>
                                                     </div>
                                                     <div class="col">
-                                                        <a href="telefones/deletar/<%= telefones_list[i].ope_codigo %>">
-                                                            <svg width="15" height="15" viewBox="0 0 100 100" fill="none"
-                                                                xmlns="http://www.w3.org/2000/svg">
+                                                        <a href="telefones/deletar/<%= telefones_list[i].tel_codigo %>">
+                                                            <svg width="15" height="15" viewBox="0 0 100 100"
+                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
                                                                 <g clip-path="url(#clip0)">
                                                                     <path
                                                                         d="M15.625 6.25C13.9674 6.25 12.3777 6.90848 11.2056 8.08058C10.0335 9.25268 9.375 10.8424 9.375 12.5V18.75C9.375 20.4076 10.0335 21.9973 11.2056 23.1694C12.3777 24.3415 13.9674 25 15.625 25H18.75V81.25C18.75 84.5652 20.067 87.7446 22.4112 90.0888C24.7554 92.433 27.9348 93.75 31.25 93.75H68.75C72.0652 93.75 75.2446 92.433 77.5888 90.0888C79.933 87.7446 81.25 84.5652 81.25 81.25V25H84.375C86.0326 25 87.6223 24.3415 88.7944 23.1694C89.9665 21.9973 90.625 20.4076 90.625 18.75V12.5C90.625 10.8424 89.9665 9.25268 88.7944 8.08058C87.6223 6.90848 86.0326 6.25 84.375 6.25H62.5C62.5 4.5924 61.8415 3.00269 60.6694 1.83058C59.4973 0.65848 57.9076 0 56.25 0L43.75 0C42.0924 0 40.5027 0.65848 39.3306 1.83058C38.1585 3.00269 37.5 4.5924 37.5 6.25H15.625ZM34.375 31.25C35.2038 31.25 35.9987 31.5792 36.5847 32.1653C37.1708 32.7513 37.5 33.5462 37.5 34.375V78.125C37.5 78.9538 37.1708 79.7487 36.5847 80.3347C35.9987 80.9208 35.2038 81.25 34.375 81.25C33.5462 81.25 32.7513 80.9208 32.1653 80.3347C31.5792 79.7487 31.25 78.9538 31.25 78.125V34.375C31.25 33.5462 31.5792 32.7513 32.1653 32.1653C32.7513 31.5792 33.5462 31.25 34.375 31.25V31.25ZM50 31.25C50.8288 31.25 51.6237 31.5792 52.2097 32.1653C52.7958 32.7513 53.125 33.5462 53.125 34.375V78.125C53.125 78.9538 52.7958 79.7487 52.2097 80.3347C51.6237 80.9208 50.8288 81.25 50 81.25C49.1712 81.25 48.3763 80.9208 47.7903 80.3347C47.2042 79.7487 46.875 78.9538 46.875 78.125V34.375C46.875 33.5462 47.2042 32.7513 47.7903 32.1653C48.3763 31.5792 49.1712 31.25 50 31.25V31.25ZM68.75 34.375V78.125C68.75 78.9538 68.4208 79.7487 67.8347 80.3347C67.2487 80.9208 66.4538 81.25 65.625 81.25C64.7962 81.25 64.0013 80.9208 63.4153 80.3347C62.8292 79.7487 62.5 78.9538 62.5 78.125V34.375C62.5 33.5462 62.8292 32.7513 63.4153 32.1653C64.0013 31.5792 64.7962 31.25 65.625 31.25C66.4538 31.25 67.2487 31.5792 67.8347 32.1653C68.4208 32.7513 68.75 33.5462 68.75 34.375V34.375Z"

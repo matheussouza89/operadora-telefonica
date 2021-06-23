@@ -18,6 +18,32 @@
             <%- include('../../components/navbar/navbar') %>
                 <div class="card p-4 m-5">
                     <div class="row">
+                        <form action="/operadoras/filtro/" method="GET">
+                            <div class="row pt-4 pb-4">
+                                <div class="col-4">
+                                    <label for="exampleInputEmail1" class="form-label">Nome da Operadora</label>
+                                    <input type="text" class="form-control"
+                                        name="ope_nome" maxlength="20"/>
+                                </div>
+                                <div class="col-4">
+                                    <label for="exampleInputEmail1" class="form-label">Nome Fantasia</label>
+                                    <input type="text" class="form-control"
+                                        name="ope_fantasia"/>
+                                </div>
+                                <div class="col-4">
+                                    <label for="exampleInputEmail1" class="form-label">Cidade</label>
+                                    <input type="text" class="form-control"
+                                        name="ope_cidade"/>
+                                </div>
+                            </div>
+                            <div class="row pb-2">
+                                <col class="col-3">
+                                <button type="submit" class="btn btn-success w-25">Pesquisar</button>
+                            </col>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="row">
                         <div class="col-9">
                             <legend>
                                 <%= title %>
@@ -53,7 +79,7 @@
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
-                                                        <a href="operadoras/<%= operadoras_list[i].ope_codigo %>">
+                                                        <a href="operadoras/visualizar/<%= operadoras_list[i].ope_codigo %>">
                                                             <svg width="15" height="15" viewBox="0 0 100 100" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                 <path
@@ -66,7 +92,7 @@
                                                         </a>
                                                     </div>
                                                     <div class="col">
-                                                        <a href="operadoras/editar/<%= operadoras_list[i].ope_codigo %>">
+                                                        <a href="operadoras/<%= operadoras_list[i].ope_codigo %>">
                                                             <svg width="15" height="15" viewBox="0 0 100 100" fill="none"
                                                                 xmlns="http://www.w3.org/2000/svg">
                                                                 <path

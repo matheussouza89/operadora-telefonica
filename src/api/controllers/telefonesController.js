@@ -1,4 +1,5 @@
 import * as telefonesModel from '../models/telefonesModels';
+import * as operadorasModel from '../models/operadorasModels';
 import { COLUMNS } from "../views/telefone/constants/columns";
 
 export function telefonesController(req, res) {
@@ -16,47 +17,84 @@ export function telefonesController(req, res) {
     })
 }
 
+export function telefonesFiltroController(req, res) {
+    console.log("Aqui")
+    const pesquisa = req.params;
+    telefonesModel.getTelefonesFilter(pesquisa.tel_codigo,pesquisa.tel_modelo,pesquisa.tel_cor,function (err, result) {
+        if (err) {
+            throw err;
+        } else {
+            console.log(result)
+            res.render('telefone/telefone.ejs', {
+                title: "Telefones",
+                columns: COLUMNS,
+                telefones_list: result
+            })
+        }
+    })
+}
+
 export function cadastroTelefones(req, res) {
-    res.render('telefone/form_telefones.ejs', {
-        title: 'Cadastrar Telefone',
-        telefones_list: {
-            // ope_codigo: '',
-            // ope_nome: '',
-            // ope_fantasia: '',
-            // ope_prefixo: '',
-            // ope_cidade: ''
-        },
-        urlSubmit: "/telefone/novo",
-        seeRegister: ""
+    operadorasModel.getAllOperadoras(function (err, result){
+        if(err){
+            throw err;
+        }else{
+            console.log(result)
+            res.render('telefone/form_telefones.ejs', {
+                title: 'Cadastrar Telefone',
+                telefones_list: [
+                    {
+                        tel_codigo: "",
+                        tel_descricao: "",
+                        tel_modelo: "",
+                        tel_cor: "",
+                        tel_chips: "",
+                        ope_codigo: "",
+                    }
+                ],
+                operadoras_list: result,
+                urlSubmit: "/telefone/novo",
+                seeRegister: "",
+                href:` `
+            })
+        }
     })
 }
 
 export function getByIdTelefones(req, res) {
     var id = req.params.codigo;
-    telefonesModel.getByIdTelefones(id, function (err, result) {
-        if (err) {
-            throw err;
-        } else {
-            res.render('telefone/form_telefones.ejs', {
-                title: 'Editar Telefone',
-                telefones_list: result,
-                urlSubmit: `telefone/editar/${id}`
+    operadorasModel.getAllOperadoras(function (err, resultOperadoraModel){
+        if(err){
+            throw err
+        }else{
+            telefonesModel.getByIdTelefones(id, function (err, resultTelefoneModel) {
+                if (err) {
+                    console.log("Erro aqui")
+                    throw err;
+                } else {
+                    res.render('telefone/form_telefones.ejs', {
+                        title: 'Editar Telefone',
+                        telefones_list: resultTelefoneModel,
+                        urlSubmit: ``,
+                        seeRegister: ' ',
+                        operadoras_list: resultOperadoraModel,
+                        href:`href='/telefones/editar/${id}`
+                    })
+                }
             })
         }
     })
 }
 
 export function createTelefone(req, res) {
-    const data = res.body;
-    console.log(res.body)
-    if (data.ope_codigo === "") {
-        data.ope_codigo = null;
+    const data = req.body;
+    if (data.tel_codigo === "") {
+        data.tel_codigo = null;
         telefonesModel.createTelefones(data, function (err, result) {
-            console.log("Passou")
             if (err) {
                 throw err
             } else {
-                res.redirect('telefone')
+                res.redirect('/telefones')
             }
         })
     } else {
@@ -64,7 +102,7 @@ export function createTelefone(req, res) {
             if (err) {
                 throw err
             } else {
-                res.redirect('telefone')
+                res.redirect('/telefones')
             }
         })
     }
@@ -72,17 +110,24 @@ export function createTelefone(req, res) {
 
 export function visualizarTelefones(req, res) {
     var id = req.params.codigo;
-    console.log(id)
-    telefonesModel.getByIdTelefones(id, function (err, result) {
-        if (err) {
-            console.log("Erro aqui")
-            throw err;
-        } else {
-            res.render('telefone/form_telefones.ejs', {
-                title: 'Editar Telefone',
-                telefones_list: result,
-                urlSubmit: ``,
-                seeRegister: readonly
+    operadorasModel.getAllOperadoras(function (err, resultOperadoraModel){
+        if(err){
+            throw err
+        }else{
+            telefonesModel.getByIdTelefones(id, function (err, resultTelefoneModel) {
+                if (err) {
+                    console.log("Erro aqui")
+                    throw err;
+                } else {
+                    res.render('telefone/form_telefones.ejs', {
+                        title: 'Editar Telefone',
+                        telefones_list: resultTelefoneModel,
+                        urlSubmit: ``,
+                        seeRegister: 'readonly',
+                        operadoras_list: resultOperadoraModel,
+                        href:` `
+                    })
+                }
             })
         }
     })
@@ -90,11 +135,11 @@ export function visualizarTelefones(req, res) {
 
 export function deleteTelefone(req, res) {
     var id = req.params.codigo;
-    telefonesModel.deleteTelefones(id, function (err, result){
-        if(err){
+    telefonesModel.deleteTelefones(id, function (err, result) {
+        if (err) {
             throw err
-        }else{
-            res.redirect('telefone')
+        } else {
+            res.redirect('/telefones')
         }
     })
 }
